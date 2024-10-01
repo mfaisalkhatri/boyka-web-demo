@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json.schemastore.org/boyka-config.json",
+  "ui": {
+    "logging": {
+      "enable": true,
+      "path": "./logs"
+    },
+    "screenshot": {
+      "enabled": true,
+      "extension": "png",
+      "path": "./screenshots",
+      "prefix": "SCR"
+    },
+    "timeout": {
+      "implicit_wait": 1,
+      "explicit_wait": 10,
+      "highlight_delay": 100,
+      "page_load_timeout": 30,
+      "script_timeout": 30
+    },
+    "web": {
+      "ecommerce": {
+        "browser": "CHROME",
+        "base_url": "https://ecommerce-playground.lambdatest.io/",
+        "custom_size": {
+          "width": 1920,
+          "height": 1080
+        },
+        "headless": false,
+        "highlight": false,
+        "resize": "NORMAL",
+        "page_load_strategy": "NORMAL",
+        "target": "LOCAL",
+        "protocol": "HTTP",
+        "version": "stable"
+      }
+    }
+  }
+}

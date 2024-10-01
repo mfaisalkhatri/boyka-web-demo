@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Boyka Framework Sample Web Suite" verbose="2">
+    <test name="ECommerce End to End Tests">
+        <classes>
+            <class name="io.github.mfaisalkhatri.web.ECommerceTest">
+                <methods>
+                    <include name="registerUserTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
