@@ -15,11 +15,11 @@
 1. Search for a product on the home page
 2. Add the product to the cart
 3. Check that the message - "Success: You have added <product> to your shopping cart!" is displayed with correct text.
-4. Check that the count of the cart increases to "1".
-5. Click on View Cart button to view the cart
+4. Click on View Cart button to view the cart
 
 ### Test Scenario 3 - verify the cart details
-1. Verify the product name and amount are correctly displayed in the cart
+1. Check that the count of the cart increases to "1".
+2. Verify the product name and amount are correctly displayed in the cart
 
 ### Test Scenario 4 - Checkout the product
 1. Check that the total amount is appearing correctly

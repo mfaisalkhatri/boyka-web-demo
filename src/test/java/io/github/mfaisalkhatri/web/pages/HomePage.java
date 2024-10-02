@@ -1,6 +1,8 @@
 package io.github.mfaisalkhatri.web.pages;
 
 import io.github.boykaframework.actions.elements.ClickableActions;
+import io.github.boykaframework.actions.elements.ElementActions;
+import io.github.boykaframework.actions.elements.TextBoxActions;
 import io.github.boykaframework.builders.Locator;
 import org.openqa.selenium.By;
 
@@ -18,11 +20,37 @@ public class HomePage {
             .name("Register Link")
             .web(By.linkText("Register"))
             .build();
+    private final Locator searchBox = Locator.buildLocator()
+            .name("Search Box")
+            .web(By.name("search"))
+            .build();
+
+    private final Locator searchBtn = Locator.buildLocator()
+            .name("Search Button")
+            .web(By.cssSelector(".type-text"))
+            .build();
+
+    private Locator cartCount = Locator.buildLocator()
+            .name("Cart Count")
+            .web(By.cssSelector("#entry_217825 > a:nth-child(1) > div:nth-child(1) > span"))
+            .build();
+
 
     public RegistrationPage openRegistrationPage() {
         ClickableActions.withMouse(myAccountLink).click();
         ClickableActions.withMouse(registerLink).click();
         return new RegistrationPage();
     }
+
+    public SearchResultPage searchForProduct(String productName) {
+        TextBoxActions.onTextBox(searchBox).enterText(productName);
+        ClickableActions.withMouse(searchBtn).click();
+        return new SearchResultPage();
+    }
+
+    public void checkTheCartCount(String expectedCount) {
+        ElementActions.onElement(cartCount).verifyText().isEqualTo(expectedCount);
+    }
+
 
 }
