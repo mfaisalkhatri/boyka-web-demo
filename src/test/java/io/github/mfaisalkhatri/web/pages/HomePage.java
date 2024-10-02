@@ -6,10 +6,7 @@ import org.openqa.selenium.By;
 
 public class HomePage {
 
-    private static final HomePage HOME_PAGE = new HomePage();
-
-    public static HomePage homePage() {
-        return HOME_PAGE;
+    public HomePage() {
     }
 
     private final Locator myAccountLink = Locator.buildLocator()
@@ -22,10 +19,10 @@ public class HomePage {
             .web(By.linkText("Register"))
             .build();
 
-    public void openRegistrationPage() {
+    public RegistrationPage openRegistrationPage() {
         ClickableActions.withMouse(myAccountLink).hover();
         ClickableActions.withMouse(registerLink).click();
-
+        return new RegistrationPage();
     }
 
 }

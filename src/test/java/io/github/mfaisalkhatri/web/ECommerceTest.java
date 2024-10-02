@@ -21,11 +21,13 @@ public class ECommerceTest {
     @Test
     public void registerUserTest() {
 
-        HomePage.homePage().openRegistrationPage();
-        RegistrationPage.registrationPage().checkPageHeader();
-        //RegistrationPage.registrationPage().registerUser();
+        HomePage homePage = new HomePage();
+        RegistrationPage registrationPage = homePage.openRegistrationPage();
+        registrationPage.checkPageHeader();
 
-        //RegistrationSuccessPage.registrationSuccessPage().checkPageHeader();
+        RegistrationSuccessPage registrationSuccessPage = registrationPage.registerUser();
+
+        registrationSuccessPage.checkPageHeader();
     }
 
     @AfterClass(description = "Tear down test class")

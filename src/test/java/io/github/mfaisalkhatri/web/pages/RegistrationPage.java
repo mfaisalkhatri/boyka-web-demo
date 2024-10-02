@@ -1,25 +1,16 @@
 package io.github.mfaisalkhatri.web.pages;
 
 import io.github.boykaframework.actions.elements.ClickableActions;
-import io.github.boykaframework.actions.elements.ElementActions;
 import io.github.boykaframework.actions.elements.TextBoxActions;
 import io.github.boykaframework.builders.Locator;
 import net.datafaker.Faker;
 import org.openqa.selenium.By;
 
 
-public class RegistrationPage {
+public class RegistrationPage extends BasePage {
 
-    private static final RegistrationPage REGISTRATION_PAGE = new RegistrationPage();
-
-    public static RegistrationPage registrationPage() {
-        return REGISTRATION_PAGE;
+    public RegistrationPage() {
     }
-
-    private final Locator pageHeader = Locator.buildLocator()
-            .name("Registration page header")
-            .web(By.cssSelector("#content h1"))
-            .build();
 
     private final Locator firstNameField = Locator.buildLocator()
             .name("First Name field")
@@ -64,12 +55,7 @@ public class RegistrationPage {
             .build();
 
 
-    public void checkPageHeader() {
-        ElementActions.onElement(pageHeader).verifyText().isEqualTo("Register Account");
-    }
-
-
-    public void registerUser() {
+    public RegistrationSuccessPage registerUser() {
         Faker faker = new Faker();
         TextBoxActions.onTextBox(firstNameField).clear();
         TextBoxActions.onTextBox(firstNameField).enterText(faker.name().firstName());
@@ -86,5 +72,6 @@ public class RegistrationPage {
         ClickableActions.withMouse(agreePrivacyPolicy).hover();
         ClickableActions.withMouse(agreePrivacyPolicy).click();
         ClickableActions.withMouse(continueBtn).click();
+        return new RegistrationSuccessPage();
     }
 }
