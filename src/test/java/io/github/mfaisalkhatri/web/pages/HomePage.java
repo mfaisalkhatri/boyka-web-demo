@@ -20,7 +20,7 @@ public class HomePage {
             .build();
 
     public RegistrationPage openRegistrationPage() {
-        ClickableActions.withMouse(myAccountLink).hover();
+        ClickableActions.withMouse(myAccountLink).click();
         ClickableActions.withMouse(registerLink).click();
         return new RegistrationPage();
     }
