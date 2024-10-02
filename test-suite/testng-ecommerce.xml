@@ -8,6 +8,7 @@
                     <exclude name="registerUserTest"/>
                     <include name="testSearchProduct"/>
                     <include name="testAddProductToCart"/>
+                    <include name="testCheckCartDetails"/>
                 </methods>
             </class>
         </classes>
