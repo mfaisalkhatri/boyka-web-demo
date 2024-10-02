@@ -5,7 +5,9 @@
         <classes>
             <class name="io.github.mfaisalkhatri.web.ECommerceTest">
                 <methods>
-                    <include name="registerUserTest"/>
+                    <exclude name="registerUserTest"/>
+                    <include name="testSearchProduct"/>
+                    <include name="testAddProductToCart"/>
                 </methods>
             </class>
         </classes>
