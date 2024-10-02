@@ -26,7 +26,6 @@ public class ECommerceTest {
         registrationPage.checkPageHeader();
 
         RegistrationSuccessPage registrationSuccessPage = registrationPage.registerUser();
-
         registrationSuccessPage.checkPageHeader();
     }
 
