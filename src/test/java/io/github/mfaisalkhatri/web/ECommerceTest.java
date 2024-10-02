@@ -1,9 +1,6 @@
 package io.github.mfaisalkhatri.web;
 
-import io.github.mfaisalkhatri.web.pages.HomePage;
-import io.github.mfaisalkhatri.web.pages.RegistrationPage;
-import io.github.mfaisalkhatri.web.pages.RegistrationSuccessPage;
-import io.github.mfaisalkhatri.web.pages.SearchResultPage;
+import io.github.mfaisalkhatri.web.pages.*;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -16,6 +13,7 @@ public class ECommerceTest {
 
     private HomePage homePage;
     private SearchResultPage searchResultPage;
+    private ShoppingCartPage shoppingCartPage;
     private String productName;
     private String productPrice;
 
@@ -50,14 +48,17 @@ public class ECommerceTest {
         this.searchResultPage.addProductToCart();
         this.searchResultPage.checkSuccessMessageForProductAddedToCart();
 
-        this.searchResultPage.navigateToCart();
+        shoppingCartPage = this.searchResultPage.navigateToCart();
     }
 
     @Test
     public void testCheckCartDetails() {
         this.homePage.checkTheCartCount("1");
+        this.shoppingCartPage.checkProductName(productName);
+        this.shoppingCartPage.checkProductPrice(productPrice);
+        this.shoppingCartPage.checkCartTotalAmount(productPrice);
 
-
+        this.shoppingCartPage.navigateToCheckoutPage();
     }
 
 

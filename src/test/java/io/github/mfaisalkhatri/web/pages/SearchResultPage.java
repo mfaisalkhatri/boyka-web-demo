@@ -64,8 +64,8 @@ public class SearchResultPage {
         ElementActions.onElement(addToCartSuccessMessage).verifyText().isEqualTo(MessageFormat.format("{0}{1}{2}{3}", "Success: You have added ", productOneName, " to your ", "shopping cart!"));
     }
 
-
-    public void navigateToCart() {
+    public ShoppingCartPage navigateToCart() {
         ClickableActions.withMouse(viewCartBtn).click();
+        return new ShoppingCartPage();
     }
 }

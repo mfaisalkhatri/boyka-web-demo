@@ -61,8 +61,10 @@ public class RegistrationPage extends BasePage {
         TextBoxActions.onTextBox(firstNameField).enterText(faker.name().firstName());
         TextBoxActions.onTextBox(lastNameField).clear();
         TextBoxActions.onTextBox(lastNameField).enterText(faker.name().lastName());
+        String email = faker.internet().emailAddress();
+        System.out.println("Email Address is : " +email);
         TextBoxActions.onTextBox(emailField).clear();
-        TextBoxActions.onTextBox(emailField).enterText(faker.internet().emailAddress());
+        TextBoxActions.onTextBox(emailField).enterText(email);
         TextBoxActions.onTextBox(telephoneField).clear();
         TextBoxActions.onTextBox(telephoneField).enterText(faker.phoneNumber().phoneNumber());
         TextBoxActions.onTextBox(passwordField).clear();
@@ -71,6 +73,7 @@ public class RegistrationPage extends BasePage {
         TextBoxActions.onTextBox(confirmPasswordField).enterText("Password@123");
         ClickableActions.withMouse(agreePrivacyPolicy).hover();
         ClickableActions.withMouse(agreePrivacyPolicy).click();
+
         ClickableActions.withMouse(continueBtn).click();
         return new RegistrationSuccessPage();
     }
