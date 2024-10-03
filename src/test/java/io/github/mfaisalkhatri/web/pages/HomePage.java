@@ -35,9 +35,13 @@ public class HomePage {
             .web(By.cssSelector("#entry_217825 > a:nth-child(1) > div:nth-child(1) > span"))
             .build();
 
+    private Locator logout = Locator.buildLocator()
+            .name("Logout link")
+            .web(By.linkText("Logout"))
+            .build();
 
     public RegistrationPage openRegistrationPage() {
-        ClickableActions.withMouse(myAccountLink).click();
+        ClickableActions.withMouse(myAccountLink).hover();
         ClickableActions.withMouse(registerLink).click();
         return new RegistrationPage();
     }
@@ -52,5 +56,8 @@ public class HomePage {
         ElementActions.onElement(cartCount).verifyText().isEqualTo(expectedCount);
     }
 
+    public void logout() {
+        ClickableActions.withMouse(logout).click();
+    }
 
 }

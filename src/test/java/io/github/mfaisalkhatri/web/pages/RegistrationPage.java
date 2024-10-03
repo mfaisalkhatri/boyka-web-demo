@@ -1,9 +1,11 @@
 package io.github.mfaisalkhatri.web.pages;
 
 import io.github.boykaframework.actions.elements.ClickableActions;
+import io.github.boykaframework.actions.elements.ElementActions;
 import io.github.boykaframework.actions.elements.TextBoxActions;
 import io.github.boykaframework.builders.Locator;
-import net.datafaker.Faker;
+import io.github.mfaisalkhatri.web.testdata.RegisterUser;
+
 import org.openqa.selenium.By;
 
 
@@ -55,18 +57,19 @@ public class RegistrationPage extends BasePage {
             .build();
 
 
-    public RegistrationSuccessPage registerUser() {
-        Faker faker = new Faker();
+    public void checkPageHeader() {
+        ElementActions.onElement(pageHeader).verifyText().isEqualTo("Register Account");
+    }
+
+    public RegistrationSuccessPage registerUser(RegisterUser registerUser) {
         TextBoxActions.onTextBox(firstNameField).clear();
-        TextBoxActions.onTextBox(firstNameField).enterText(faker.name().firstName());
+        TextBoxActions.onTextBox(firstNameField).enterText(registerUser.getFirstName());
         TextBoxActions.onTextBox(lastNameField).clear();
-        TextBoxActions.onTextBox(lastNameField).enterText(faker.name().lastName());
-        String email = faker.internet().emailAddress();
-        System.out.println("Email Address is : " +email);
+        TextBoxActions.onTextBox(lastNameField).enterText(registerUser.getLastName());
         TextBoxActions.onTextBox(emailField).clear();
-        TextBoxActions.onTextBox(emailField).enterText(email);
+        TextBoxActions.onTextBox(emailField).enterText(registerUser.getEmail());
         TextBoxActions.onTextBox(telephoneField).clear();
-        TextBoxActions.onTextBox(telephoneField).enterText(faker.phoneNumber().phoneNumber());
+        TextBoxActions.onTextBox(telephoneField).enterText(registerUser.getPhoneNumber());
         TextBoxActions.onTextBox(passwordField).clear();
         TextBoxActions.onTextBox(passwordField).enterText("Password@123");
         TextBoxActions.onTextBox(confirmPasswordField).clear();
