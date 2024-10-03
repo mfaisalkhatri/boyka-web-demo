@@ -14,8 +14,12 @@ public class ECommerceTest {
     private HomePage homePage;
     private SearchResultPage searchResultPage;
     private ShoppingCartPage shoppingCartPage;
+    private CheckoutPage checkoutPage;
+    private ConfirmOrder confirmOrder;
+    private OrderSuccessPage orderSuccessPage;
     private String productName;
     private String productPrice;
+
 
     @BeforeClass(description = "Setup test class")
     public void setupClass() {
@@ -48,17 +52,41 @@ public class ECommerceTest {
         this.searchResultPage.addProductToCart();
         this.searchResultPage.checkSuccessMessageForProductAddedToCart();
 
-        shoppingCartPage = this.searchResultPage.navigateToCart();
+        this.shoppingCartPage = this.searchResultPage.navigateToCart();
     }
 
     @Test
     public void testCheckCartDetails() {
         this.homePage.checkTheCartCount("1");
-        this.shoppingCartPage.checkProductName(productName);
-        this.shoppingCartPage.checkProductPrice(productPrice);
-        this.shoppingCartPage.checkCartTotalAmount(productPrice);
+        this.shoppingCartPage.checkProductName(this.productName);
+        this.shoppingCartPage.checkProductPrice(this.productPrice);
+        this.shoppingCartPage.checkCartTotalAmount(this.productPrice);
 
-        this.shoppingCartPage.navigateToCheckoutPage();
+        this.checkoutPage = this.shoppingCartPage.navigateToCheckoutPage();
+    }
+
+
+    @Test
+    public void testProductCheckout() {
+        this.checkoutPage.checkProductName(this.productName);
+        this.checkoutPage.checkProductPrice(this.productPrice);
+        this.checkoutPage.addBillingAddress();
+
+        this.confirmOrder = this.checkoutPage.checkoutProduct();
+
+    }
+
+    @Test
+    public void testConfirmOrder() {
+        this.confirmOrder.checkPageHeader();
+        this.confirmOrder.checkProductName(this.productName);
+        this.orderSuccessPage = this.confirmOrder.confirmOrder();
+    }
+
+    @Test
+    public void testOrderSuccess() {
+        this.orderSuccessPage.checkOrderSuccessMessage();
+        this.orderSuccessPage.continueToHomePage();
     }
 
 

@@ -1,6 +1,7 @@
 package io.github.mfaisalkhatri.web.pages;
 
 import io.github.boykaframework.actions.elements.ClickableActions;
+import io.github.boykaframework.actions.elements.ElementActions;
 import io.github.boykaframework.actions.elements.TextBoxActions;
 import io.github.boykaframework.builders.Locator;
 import net.datafaker.Faker;
@@ -55,18 +56,19 @@ public class RegistrationPage extends BasePage {
             .build();
 
 
+    public void checkPageHeader() {
+        ElementActions.onElement(pageHeader).verifyText().isEqualTo("Register Account");
+    }
+
     public RegistrationSuccessPage registerUser() {
-        Faker faker = new Faker();
         TextBoxActions.onTextBox(firstNameField).clear();
-        TextBoxActions.onTextBox(firstNameField).enterText(faker.name().firstName());
+        TextBoxActions.onTextBox(firstNameField).enterText(firstName);
         TextBoxActions.onTextBox(lastNameField).clear();
-        TextBoxActions.onTextBox(lastNameField).enterText(faker.name().lastName());
-        String email = faker.internet().emailAddress();
-        System.out.println("Email Address is : " +email);
+        TextBoxActions.onTextBox(lastNameField).enterText(lastName);
         TextBoxActions.onTextBox(emailField).clear();
         TextBoxActions.onTextBox(emailField).enterText(email);
         TextBoxActions.onTextBox(telephoneField).clear();
-        TextBoxActions.onTextBox(telephoneField).enterText(faker.phoneNumber().phoneNumber());
+        TextBoxActions.onTextBox(telephoneField).enterText(phoneNumber);
         TextBoxActions.onTextBox(passwordField).clear();
         TextBoxActions.onTextBox(passwordField).enterText("Password@123");
         TextBoxActions.onTextBox(confirmPasswordField).clear();

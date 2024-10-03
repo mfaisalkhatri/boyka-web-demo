@@ -30,7 +30,7 @@ public class SearchResultPage {
 
     private Locator addToCartBtn = Locator.buildLocator()
             .name("Add to cart button")
-            .web(By.cssSelector("btn-cart.cart-28"))
+            .web(By.cssSelector(".cart-28"))
             .build();
 
     private Locator addToCartSuccessMessage = Locator.buildLocator()
@@ -48,7 +48,7 @@ public class SearchResultPage {
     }
 
     public String getProductName() {
-        return ElementActions.onElement(productOne).getText();
+        return ElementActions.onElement(productOneName).getText();
     }
 
     public String getProductPrice() {
@@ -61,7 +61,7 @@ public class SearchResultPage {
     }
 
     public void checkSuccessMessageForProductAddedToCart() {
-        ElementActions.onElement(addToCartSuccessMessage).verifyText().isEqualTo(MessageFormat.format("{0}{1}{2}{3}", "Success: You have added ", productOneName, " to your ", "shopping cart!"));
+        ElementActions.onElement(addToCartSuccessMessage).verifyText().isEqualTo(MessageFormat.format("{0}\n{1}\n{2}\n{3}\n{4}", "Success: You have added", getProductName() , "to your", "shopping cart", "!"));
     }
 
     public ShoppingCartPage navigateToCart() {

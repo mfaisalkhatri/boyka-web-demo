@@ -13,33 +13,38 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <boyka.framework.vesion>2.1.1</boyka.framework.vesion>
+        <lombok.version>1.18.34</lombok.version>
+        <testng.version>7.10.2</testng.version>
+        <datafaker.version>2.4.0</datafaker.version>
+
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>io.github.boykaframework</groupId>
             <artifactId>boyka-framework</artifactId>
-            <version>2.1.0</version>
+            <version>${boyka.framework.vesion}</version>
         </dependency>
     
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.34</version>
+            <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
     
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>7.10.2</version>
+            <version>${testng.version}</version>
             <scope>test</scope>
         </dependency>
     
         <dependency>
             <groupId>net.datafaker</groupId>
             <artifactId>datafaker</artifactId>
-            <version>2.4.0</version>
+            <version>${datafaker.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

@@ -5,10 +5,13 @@
         <classes>
             <class name="io.github.mfaisalkhatri.web.ECommerceTest">
                 <methods>
-                    <exclude name="registerUserTest"/>
+                    <include name="testRegisterUser"/>
                     <include name="testSearchProduct"/>
                     <include name="testAddProductToCart"/>
                     <include name="testCheckCartDetails"/>
+                    <include name="testProductCheckout"/>
+                    <include name="testConfirmOrder"/>
+                    <include name="testOrderSuccess"/>
                 </methods>
             </class>
         </classes>

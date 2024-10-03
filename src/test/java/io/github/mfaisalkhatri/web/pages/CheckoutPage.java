@@ -1,9 +1,14 @@
 package io.github.mfaisalkhatri.web.pages;
 
+import io.github.boykaframework.actions.elements.ClickableActions;
+import io.github.boykaframework.actions.elements.DropDownActions;
+import io.github.boykaframework.actions.elements.ElementActions;
+import io.github.boykaframework.actions.elements.TextBoxActions;
 import io.github.boykaframework.builders.Locator;
+import net.datafaker.Faker;
 import org.openqa.selenium.By;
 
-public class CheckoutPage {
+public class CheckoutPage extends BasePage {
 
     public CheckoutPage(){
 
@@ -22,6 +27,11 @@ public class CheckoutPage {
     private Locator firstNameField = Locator.buildLocator()
             .name("First Name Field")
             .web(By.id("input-payment-firstname"))
+            .build();
+
+    private Locator lastNameField = Locator.buildLocator()
+            .name("Last Name Field")
+            .web(By.id("input-payment-lastname"))
             .build();
 
     private Locator companyField = Locator.buildLocator()
@@ -61,13 +71,58 @@ public class CheckoutPage {
 
     private Locator termsAndConditionsCheckbox = Locator.buildLocator()
             .name("Terms and Conditions Checkbox")
-            .web(By.id("div.custom-control:nth-child(6)"))
+            .web(By.cssSelector("div.custom-control:nth-child(6) > label"))
             .build();
 
     private Locator continueBtn = Locator.buildLocator()
             .name("Terms and Conditions Checkbox")
             .web(By.cssSelector("button#button-save"))
             .build();
+
+    public void checkProductName(String expectedProductName) {
+        ElementActions.onElement(productName).verifyText().isEqualTo(expectedProductName);
+    }
+
+    public void checkProductPrice(String expectedProductPrice) {
+        ElementActions.onElement(productPrice).verifyText().isEqualTo(expectedProductPrice);
+    }
+
+    public void addBillingAddress() {
+        Faker faker = new Faker();
+        TextBoxActions.onTextBox(firstNameField).clear();
+        TextBoxActions.onTextBox(firstNameField).enterText(firstName);
+
+        TextBoxActions.onTextBox(lastNameField).clear();
+        TextBoxActions.onTextBox(lastNameField).enterText(lastName);
+
+        TextBoxActions.onTextBox(companyField).clear();
+        TextBoxActions.onTextBox(companyField).enterText(faker.company().name());
+
+        TextBoxActions.onTextBox(addressOneField).clear();
+        TextBoxActions.onTextBox(addressOneField).enterText(faker.address().streetAddress());
+
+        TextBoxActions.onTextBox(cityField).clear();
+        TextBoxActions.onTextBox(cityField).enterText(faker.address().city());
+
+        TextBoxActions.onTextBox(cityField).clear();
+        TextBoxActions.onTextBox(cityField).enterText(faker.address().city());
+
+        TextBoxActions.onTextBox(postCodeField).clear();
+        TextBoxActions.onTextBox(postCodeField).enterText(faker.address().postcode());
+
+        DropDownActions.onDropDown(countryField).selectByText("Saudi Arabia");
+        DropDownActions.onDropDown(regionField).selectByText("Ar Riyad");
+
+
+    }
+
+    public ConfirmOrder checkoutProduct() {
+        TextBoxActions.onTextBox(commentBox).enterText("Demo Order");
+        ClickableActions.withMouse(termsAndConditionsCheckbox).hover();
+        ClickableActions.withMouse(termsAndConditionsCheckbox).click();
+        ClickableActions.withMouse(continueBtn).click();
+        return new ConfirmOrder();
+    }
 
 
 

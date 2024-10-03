@@ -26,8 +26,11 @@
           "width": 1920,
           "height": 1080
         },
+        "browser_options": [
+          "autofill.profile_enabled"
+        ],
         "headless": false,
-        "highlight": false,
+        "highlight": true,
         "resize": "NORMAL",
         "page_load_strategy": "NORMAL",
         "target": "LOCAL",
