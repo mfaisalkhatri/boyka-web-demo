@@ -5,6 +5,7 @@ import io.github.boykaframework.actions.elements.DropDownActions;
 import io.github.boykaframework.actions.elements.ElementActions;
 import io.github.boykaframework.actions.elements.TextBoxActions;
 import io.github.boykaframework.builders.Locator;
+import io.github.mfaisalkhatri.web.testdata.RegisterUser;
 import net.datafaker.Faker;
 import org.openqa.selenium.By;
 
@@ -87,13 +88,13 @@ public class CheckoutPage extends BasePage {
         ElementActions.onElement(productPrice).verifyText().isEqualTo(expectedProductPrice);
     }
 
-    public void addBillingAddress() {
+    public void addBillingAddress(RegisterUser registerUser) {
         Faker faker = new Faker();
         TextBoxActions.onTextBox(firstNameField).clear();
-        TextBoxActions.onTextBox(firstNameField).enterText(firstName);
+        TextBoxActions.onTextBox(firstNameField).enterText(registerUser.getFirstName());
 
         TextBoxActions.onTextBox(lastNameField).clear();
-        TextBoxActions.onTextBox(lastNameField).enterText(lastName);
+        TextBoxActions.onTextBox(lastNameField).enterText(registerUser.getLastName());
 
         TextBoxActions.onTextBox(companyField).clear();
         TextBoxActions.onTextBox(companyField).enterText(faker.company().name());
