@@ -27,7 +27,6 @@ public class OrderSuccessPage {
             .build();
 
     public void checkOrderSuccessMessage() {
-        //ElementActions.onElement(orderSuccessMessageText).verifyText().isEqualTo("Your order has been successfully processed!");
 
         DriverActions.withDriver().waitUntil(d -> onElement(orderSuccessMessageText).getText().equals("Your order has been successfully placed!"));
 
