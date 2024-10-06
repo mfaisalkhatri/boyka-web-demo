@@ -1,42 +1,59 @@
 package io.github.mfaisalkhatri.web.pages;
 
-import static org.openqa.selenium.By.id;
-import static org.openqa.selenium.By.partialLinkText;
-import static org.openqa.selenium.By.tagName;
-
+import io.github.boykaframework.actions.elements.ClickableActions;
+import io.github.boykaframework.actions.elements.ElementActions;
+import io.github.boykaframework.actions.elements.TextBoxActions;
 import io.github.boykaframework.builders.Locator;
-import lombok.Getter;
+import org.openqa.selenium.By;
 
-@Getter
 public class LoginPage {
-    private static final LoginPage LOGIN_PAGE = new LoginPage ();
 
-    public static LoginPage loginPage () {
-        return LOGIN_PAGE;
+    private final Locator alertMessage      = Locator.buildLocator ()
+        .name ("Login alert message")
+        .web (By.cssSelector ("#account-login .alert"))
+        .build ();
+    private final Locator emailAddressField = Locator.buildLocator ()
+        .name ("Email Address field")
+        .web (By.id ("input-email"))
+        .build ();
+    private final Locator loginBoxTitle     = Locator.buildLocator ()
+        .name ("Login box title")
+        .web (By.cssSelector (".col-lg-6:nth-child(2) h2"))
+        .build ();
+    private final Locator loginBtn          = Locator.buildLocator ()
+        .name ("Login button")
+        .web (By.cssSelector ("input.btn"))
+        .build ();
+    private final Locator passwordField     = Locator.buildLocator ()
+        .name ("Password field")
+        .web (By.id ("input-password"))
+        .build ();
+
+    public LoginPage () {
     }
 
-    private final Locator login    = Locator.buildLocator ()
-        .name ("Login Button")
-        .web (tagName ("button"))
-        .build ();
-    private final Locator logout   = Locator.buildLocator ()
-        .name ("Logout Button")
-        .web (partialLinkText ("Logout"))
-        .build ();
-    private final Locator message  = Locator.buildLocator ()
-        .name ("Message Label")
-        .web (id ("flash"))
-        .build ();
-    private final Locator password = Locator.buildLocator ()
-        .name ("Password")
-        .web (id ("password"))
-        .build ();
-    private final Locator userName = Locator.buildLocator ()
-        .name ("User Name")
-        .web (id ("username"))
-        .build ();
+    public void checkLoginBoxTitle () {
+        ElementActions.onElement (this.loginBoxTitle)
+            .verifyText ()
+            .isEqualTo ("Returning Customer");
+    }
 
-    private LoginPage () {
-        // Utility class.
+    public void checkWarningMessage () {
+        ElementActions.onElement (this.alertMessage)
+            .verifyText ()
+            .isEqualTo ("Warning: No match for E-Mail Address and/or Password.");
+    }
+
+    public void performLogin (final String username, final String password) {
+        TextBoxActions.onTextBox (this.emailAddressField)
+            .clear ();
+        TextBoxActions.onTextBox (this.emailAddressField)
+            .enterText (username);
+        TextBoxActions.onTextBox (this.passwordField)
+            .clear ();
+        TextBoxActions.onTextBox (this.passwordField)
+            .enterText (password);
+        ClickableActions.withMouse (this.loginBtn)
+            .click ();
     }
 }

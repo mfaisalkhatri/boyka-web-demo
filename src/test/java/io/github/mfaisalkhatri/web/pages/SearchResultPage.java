@@ -1,71 +1,76 @@
 package io.github.mfaisalkhatri.web.pages;
 
+import java.text.MessageFormat;
+
 import io.github.boykaframework.actions.elements.ClickableActions;
 import io.github.boykaframework.actions.elements.ElementActions;
 import io.github.boykaframework.builders.Locator;
 import org.openqa.selenium.By;
 
-import java.text.MessageFormat;
-
 public class SearchResultPage {
 
-    public SearchResultPage() {
+    private final Locator addToCartBtn            = Locator.buildLocator ()
+        .name ("Add to cart button")
+        .web (By.cssSelector (".cart-28"))
+        .build ();
+    private final Locator addToCartSuccessMessage = Locator.buildLocator ()
+        .name ("Add to Cart Success Message")
+        .web (By.cssSelector (".d-flex > p"))
+        .build ();
+    private final Locator productOne              = Locator.buildLocator ()
+        .name ("Product One")
+        .web (By.cssSelector (".product-layout"))
+        .build ();
+    private final Locator productOneName          = Locator.buildLocator ()
+        .name ("Product One Name")
+        .web (By.cssSelector (".caption h4"))
+        .build ();
+    private final Locator productOnePrice         = Locator.buildLocator ()
+        .name ("Product One Price")
+        .web (By.cssSelector (".caption .price span"))
+        .build ();
+    private final Locator viewCartBtn             = Locator.buildLocator ()
+        .name ("View Cart button")
+        .web (By.cssSelector (".form-row a.btn-primary"))
+        .build ();
+
+    public SearchResultPage () {
 
     }
 
-    private Locator productOne = Locator.buildLocator()
-            .name("Product One")
-            .web(By.cssSelector(".product-layout"))
-            .build();
-
-    private Locator productOneName = Locator.buildLocator()
-            .name("Product One Name")
-            .web(By.cssSelector(".caption h4"))
-            .build();
-
-    private Locator productOnePrice = Locator.buildLocator()
-            .name("Product One Price")
-            .web(By.cssSelector(".caption .price span"))
-            .build();
-
-    private Locator addToCartBtn = Locator.buildLocator()
-            .name("Add to cart button")
-            .web(By.cssSelector(".cart-28"))
-            .build();
-
-    private Locator addToCartSuccessMessage = Locator.buildLocator()
-            .name("Add to Cart Success Message")
-            .web(By.cssSelector(".d-flex > p"))
-            .build();
-
-    private Locator viewCartBtn = Locator.buildLocator()
-            .name("View Cart button")
-            .web(By.cssSelector(".form-row a.btn-primary"))
-            .build();
-
-    public void checkProductName(String expectedProductName) {
-        ElementActions.onElement(productOne).verifyText().contains(expectedProductName);
+    public void addProductToCart () {
+        ClickableActions.withMouse (this.productOne)
+            .hover ();
+        ClickableActions.withMouse (this.addToCartBtn)
+            .click ();
     }
 
-    public String getProductName() {
-        return ElementActions.onElement(productOneName).getText();
+    public void checkProductName (final String expectedProductName) {
+        ElementActions.onElement (this.productOne)
+            .verifyText ()
+            .contains (expectedProductName);
     }
 
-    public String getProductPrice() {
-        return ElementActions.onElement(productOnePrice).getText();
+    public void checkSuccessMessageForProductAddedToCart () {
+        ElementActions.onElement (this.addToCartSuccessMessage)
+            .verifyText ()
+            .isEqualTo (MessageFormat.format ("{0}\n{1}\n{2}\n{3}\n{4}", "Success: You have added", getProductName (),
+                "to your", "shopping cart", "!"));
     }
 
-    public void addProductToCart() {
-        ClickableActions.withMouse(productOne).hover();
-        ClickableActions.withMouse(addToCartBtn).click();
+    public String getProductName () {
+        return ElementActions.onElement (this.productOneName)
+            .getText ();
     }
 
-    public void checkSuccessMessageForProductAddedToCart() {
-        ElementActions.onElement(addToCartSuccessMessage).verifyText().isEqualTo(MessageFormat.format("{0}\n{1}\n{2}\n{3}\n{4}", "Success: You have added", getProductName() , "to your", "shopping cart", "!"));
+    public String getProductPrice () {
+        return ElementActions.onElement (this.productOnePrice)
+            .getText ();
     }
 
-    public ShoppingCartPage navigateToCart() {
-        ClickableActions.withMouse(viewCartBtn).click();
-        return new ShoppingCartPage();
+    public ShoppingCartPage navigateToCart () {
+        ClickableActions.withMouse (this.viewCartBtn)
+            .click ();
+        return new ShoppingCartPage ();
     }
 }

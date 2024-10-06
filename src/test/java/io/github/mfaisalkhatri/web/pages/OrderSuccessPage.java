@@ -8,29 +8,29 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class OrderSuccessPage {
 
+    private final Locator continueBtn             = Locator.buildLocator ()
+        .name ("Continue Button")
+        .web (By.cssSelector ("div.buttons .btn-primary"))
+        .build ();
+    private final Locator orderSuccessMessageText = Locator.buildLocator ()
+        .name ("Order Status Text")
+        .web (By.cssSelector ("#content h1"))
+        .build ();
 
-    public OrderSuccessPage() {
-
-    }
-
-    private Locator orderSuccessMessageText = Locator.buildLocator()
-            .name("Order Status Text")
-            .web(By.cssSelector("#content h1"))
-            .build();
-
-    private Locator continueBtn = Locator.buildLocator()
-            .name("Continue Button")
-            .web(By.cssSelector("div.buttons .btn-primary"))
-            .build();
-
-    public void checkOrderSuccessMessage() {
-
-        DriverActions.withDriver().waitUntil(ExpectedConditions.textToBe(orderSuccessMessageText.getLocator(), "Your order has been placed!"));
+    public OrderSuccessPage () {
 
     }
 
-    public void continueToHomePage() {
-        ClickableActions.withMouse(continueBtn).click();
+    public void checkOrderSuccessMessage () {
+
+        DriverActions.withDriver ()
+            .waitUntil (ExpectedConditions.textToBe (this.orderSuccessMessageText.getLocator (),
+                "Your order has been placed!"));
+    }
+
+    public void continueToHomePage () {
+        ClickableActions.withMouse (this.continueBtn)
+            .click ();
     }
 
 }

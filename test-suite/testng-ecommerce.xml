@@ -16,4 +16,14 @@
             </class>
         </classes>
     </test>
+    <test name="Login Data Provider Tests using Excel Sheet">
+        <classes>
+            <class name="io.github.mfaisalkhatri.web.LoginDataProviderTest">
+                <methods>
+                    <include name="testLogin"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
 </suite>
