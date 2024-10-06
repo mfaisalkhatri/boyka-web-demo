@@ -6,16 +6,18 @@ import org.openqa.selenium.By;
 
 public class MyAccountPage {
 
-    public MyAccountPage() {
+    Locator pageHeader = Locator.buildLocator ()
+        .name ("My Account page header")
+        .web (By.cssSelector ("#content > div:nth-child(1) > h2"))
+        .build ();
+
+    public MyAccountPage () {
 
     }
 
-    Locator pageHeader = Locator.buildLocator()
-            .name("My Account page header")
-            .web(By.cssSelector("#content > div:nth-child(1) > h2"))
-            .build();
-
-    public void checkPageHeader() {
-        ElementActions.onElement(pageHeader).verifyText().isEqualTo("My Account");
+    public void checkPageHeader () {
+        ElementActions.onElement (this.pageHeader)
+            .verifyText ()
+            .isEqualTo ("My Account");
     }
 }

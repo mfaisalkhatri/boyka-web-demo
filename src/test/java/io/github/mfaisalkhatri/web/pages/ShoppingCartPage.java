@@ -7,48 +7,49 @@ import org.openqa.selenium.By;
 
 public class ShoppingCartPage {
 
-    public ShoppingCartPage() {
+    private final Locator cartTotalAmount = Locator.buildLocator ()
+        .name ("Shopping Cart Total Amount")
+        .web (By.cssSelector ("table.m-0 > tbody:nth-child(1) > tr:nth-child(4) > td:nth-child(2) > strong"))
+        .build ();
+    private final Locator checkoutBtn     = Locator.buildLocator ()
+        .name ("Checkout button")
+        .web (By.cssSelector (".buttons a.btn-primary"))
+        .build ();
+    private final Locator productName     = Locator.buildLocator ()
+        .name ("Product Name in Shopping cart")
+        .web (By.cssSelector ("#content .table-responsive .table td:nth-child(2) a"))
+        .build ();
+    private final Locator productPrice    = Locator.buildLocator ()
+        .name ("Product Total Price in Cart")
+        .web (By.cssSelector ("td.text-right:nth-child(6)"))
+        .build ();
+
+    public ShoppingCartPage () {
 
     }
 
-    private Locator productName = Locator.buildLocator()
-            .name("Product Name in Shopping cart")
-            .web(By.cssSelector("#content .table-responsive .table td:nth-child(2) a"))
-            .build();
-
-    private Locator productPrice = Locator.buildLocator()
-            .name("Product Total Price in Cart")
-            .web(By.cssSelector("td.text-right:nth-child(6)"))
-            .build();
-
-    private Locator cartTotalAmount = Locator.buildLocator()
-            .name("Shopping Cart Total Amount")
-            .web(By.cssSelector("table.m-0 > tbody:nth-child(1) > tr:nth-child(4) > td:nth-child(2) > strong"))
-            .build();
-
-    private Locator checkoutBtn = Locator.buildLocator()
-            .name("Checkout button")
-            .web(By.cssSelector(".buttons a.btn-primary"))
-            .build();
-
-
-    public void checkProductName(String expectedProductName) {
-        ElementActions.onElement(productName).verifyText().isEqualTo(expectedProductName);
+    public void checkCartTotalAmount (final String expectedTotalAmount) {
+        ElementActions.onElement (this.cartTotalAmount)
+            .verifyText ()
+            .isEqualTo (expectedTotalAmount);
     }
 
-    public void checkProductPrice(String expectedProductPrice) {
-        ElementActions.onElement(productPrice).verifyText().isEqualTo(expectedProductPrice);
+    public void checkProductName (final String expectedProductName) {
+        ElementActions.onElement (this.productName)
+            .verifyText ()
+            .isEqualTo (expectedProductName);
     }
 
-    public void checkCartTotalAmount(String expectedTotalAmount) {
-        ElementActions.onElement(cartTotalAmount).verifyText().isEqualTo(expectedTotalAmount);
+    public void checkProductPrice (final String expectedProductPrice) {
+        ElementActions.onElement (this.productPrice)
+            .verifyText ()
+            .isEqualTo (expectedProductPrice);
     }
 
-    public CheckoutPage navigateToCheckoutPage() {
-        ClickableActions.withMouse(checkoutBtn).click();
-        return new CheckoutPage();
+    public CheckoutPage navigateToCheckoutPage () {
+        ClickableActions.withMouse (this.checkoutBtn)
+            .click ();
+        return new CheckoutPage ();
     }
-
-
 
 }
