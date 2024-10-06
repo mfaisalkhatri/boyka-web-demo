@@ -16,6 +16,11 @@ public class HomePage {
             .web(By.cssSelector("#widget-navbar-217834 > ul > li:nth-child(6) > a"))
             .build();
 
+    private final Locator loginLink = Locator.buildLocator()
+            .name("Login link")
+            .web(By.linkText("Login"))
+            .build();
+
     private final Locator registerLink = Locator.buildLocator()
             .name("Register Link")
             .web(By.linkText("Register"))
@@ -58,6 +63,12 @@ public class HomePage {
 
     public void logout() {
         ClickableActions.withMouse(logout).click();
+    }
+
+    public LoginPage openLoginPage() {
+        ClickableActions.withMouse(myAccountLink).hover();
+        ClickableActions.withMouse(loginLink).click();
+        return new LoginPage();
     }
 
 }

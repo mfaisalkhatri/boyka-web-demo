@@ -1,6 +1,9 @@
 {
   "$schema": "https://json.schemastore.org/boyka-config.json",
   "listeners_package": "io.github.mfaisalkhatri.web.listeners",
+  "data": {
+    "path": "data/"
+  },
   "ui": {
     "logging": {
       "enable": true,
