@@ -3,10 +3,8 @@ package io.github.mfaisalkhatri.web;
 import io.github.boykaframework.actions.drivers.WindowActions;
 import io.github.mfaisalkhatri.web.pages.*;
 import io.github.mfaisalkhatri.web.testdata.RegisterUser;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
+
 
 import static io.github.boykaframework.enums.PlatformType.WEB;
 import static io.github.boykaframework.manager.ParallelSession.clearSession;
@@ -95,7 +93,7 @@ public class ECommerceTest {
         this.orderSuccessPage.continueToHomePage();
     }
 
-    @AfterTest(description = "Take screenshots after every test")
+    @AfterMethod(description = "Take screenshots after every test")
     public void takeScreenshots() {
         WindowActions.onWindow().takeScreenshot();
     }
